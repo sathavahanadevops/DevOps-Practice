@@ -37,11 +37,11 @@ jobs:
 
       - name: Initialize Terraform with Backend Configuration
         run: terraform init -backend-config="resource_group_name=satha-pc" -backend-config="storage_account_name=terraformstatesathapc" -backend-config="container_name=terraformstate" -backend-config="key=terraform.tfstate" -backend-config="access_key=${{ secrets.STATEFILE_ACCESS_KEY }}"
-        working-directory: ./terraform-VmCreation
+        working-directory: ./terraform
 
       - name: Select Terraform workspace
         run: terraform workspace select default || terraform workspace new default
-        working-directory: ./terraform-VmCreation
+        working-directory: ./terraform
 
       - name: Terraform Plan Apply
         if: ${{ github.event.inputs.action == 'apply' || github.event.inputs.action == 'both' }}
@@ -51,7 +51,7 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform plan -out=tfplan
-        working-directory: ./terraform-VmCreation
+        working-directory: ./terraform
 
       - name: Terraform Apply
         if: ${{ github.event.inputs.action == 'apply' || github.event.inputs.action == 'both' }}
@@ -61,7 +61,7 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform apply -auto-approve tfplan
-        working-directory: ./terraform-VmCreation
+        working-directory: ./terraform
 
   terraform_destroy:
     name: 'Terraform Destroy'
@@ -88,11 +88,11 @@ jobs:
 
       - name: Initialize Terraform with Backend Configuration
         run: terraform init -backend-config="resource_group_name=satha-pc" -backend-config="storage_account_name=terraformstatesathapc" -backend-config="container_name=terraformstate" -backend-config="key=terraform.tfstate" -backend-config="access_key=${{ secrets.STATEFILE_ACCESS_KEY }}"
-        working-directory: ./terraform-VmCreation
+        working-directory: ./terraform
 
       - name: Select Terraform workspace
         run: terraform workspace select default || terraform workspace new default
-        working-directory: ./terraform-VmCreation
+        working-directory: ./terraform
 
       - name: Terraform Plan Destroy
         if: ${{ github.event.inputs.action == 'destroy' || github.event.inputs.action == 'both' }}
@@ -102,7 +102,7 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform plan -destroy -out=tfplan
-        working-directory: ./terraform-VmCreation
+        working-directory: ./terraform
 
       - name: Terraform Destroy
         if: ${{ github.event.inputs.action == 'destroy' || github.event.inputs.action == 'both' }}
@@ -112,4 +112,4 @@ jobs:
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform apply -destroy -auto-approve tfplan
-        working-directory: ./terraform-VmCreation
+        working-directory: ./terraform
