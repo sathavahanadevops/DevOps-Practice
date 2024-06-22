@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "diskName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "sku": {
+            "type": "string"
+        },
+        "diskSizeGb": {
+            "type": "int"
+        },
+        "sourceResourceId": {
+            "type": "string"
+        },
+        "createOption": {
+            "type": "string"
+        },
+        "hyperVGeneration": {
+            "type": "string",
+            "defaultValue": "V1"
+        },
+        "diskEncryptionSetType": {
+            "type": "string"
+        },
+        "dataAccessAuthMode": {
+            "type": "string"
+        },
+        "networkAccessPolicy": {
+            "type": "string"
+        },
+        "publicNetworkAccess": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2022-03-02",
+            "type": "Microsoft.Compute/disks",
+            "name": "[parameters('diskName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "creationData": {
+                    "createOption": "[parameters('createOption')]",
+                    "sourceResourceId": "[parameters('sourceResourceId')]"
+                },
+                "diskSizeGB": "[parameters('diskSizeGb')]",
+                "encryption": {
+                    "type": "[parameters('diskEncryptionSetType')]"
+                },
+                "dataAccessAuthMode": "[parameters('dataAccessAuthMode')]",
+                "networkAccessPolicy": "[parameters('networkAccessPolicy')]",
+                "publicNetworkAccess": "[parameters('publicNetworkAccess')]"
+            },
+            "sku": {
+                "name": "[parameters('sku')]"
+            },
+            "tags": {}
+        }
+    ]
+}
