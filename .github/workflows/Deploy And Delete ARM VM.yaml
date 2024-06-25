@@ -31,8 +31,8 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: satha-pc
-          template: ./Azure-VM/AzureVmDiskCreation.json
-          parameters: ./Azure-VM/AzureVmDiskCreationParameters.json
+          template: ./windows-vm/satha-disk-template.json
+          parameters: ./windows-vm/satha-disk-parameters.json
           deploymentName: DiskCreation
 
       - name: Deploy Windows VM
@@ -40,8 +40,8 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: satha-pc
-          template: ./Azure-VM/AzureVmCreation.json
-          parameters: ./Azure-VM/AzureVmCreationParameters.json
+          template: ./windows-vm/windows-vm-template.json
+          parameters: ./windows-vm/windows-vm-parameters.json
           deploymentName: VmCreation
 
   Delete-Azure-VM:
@@ -57,10 +57,10 @@ jobs:
 
       - name: Delete Deployed Resources
         run: |
-          az resource delete --resource-group satha-pc --name satha-vm --resource-type Microsoft.Compute/virtualMachines
-          az resource delete --resource-group satha-pc --name satha-vm-ip --resource-type Microsoft.Network/publicIPAddresses
-          az resource delete --resource-group satha-pc --name satha-vm-nsg --resource-type Microsoft.Network/networkSecurityGroups
-          az resource delete --resource-group satha-pc --name satha-vm-vnet --resource-type Microsoft.Network/virtualNetworks
-          az resource delete --resource-group satha-pc --name satha-vm308 --resource-type Microsoft.Network/networkInterfaces
+          az resource delete --resource-group satha-pc --name satha-windows-vm --resource-type Microsoft.Compute/virtualMachines
+          az resource delete --resource-group satha-pc --name satha-windows-vm-ip --resource-type Microsoft.Network/publicIPAddresses
+          az resource delete --resource-group satha-pc --name satha-windows-vm-nsg --resource-type Microsoft.Network/networkSecurityGroups
+          az resource delete --resource-group satha-pc --name satha-windows-vm-vnet --resource-type Microsoft.Network/virtualNetworks
+          az resource delete --resource-group satha-pc --name satha-windows-vm225 --resource-type Microsoft.Network/networkInterfaces
           az resource delete --resource-group satha-pc --name satha-vm_OsDisk_1_625d933363ea4c24bfd208af5539a62f --resource-type Microsoft.Compute/disks
           az resource delete --resource-group satha-pc --name satha-ntfs-disk --resource-type Microsoft.Compute/disks
