@@ -63,4 +63,4 @@ jobs:
           az resource delete --resource-group satha-pc --name satha-vm-vnet --resource-type Microsoft.Network/virtualNetworks
           az resource delete --resource-group satha-pc --name satha-vm308 --resource-type Microsoft.Network/networkInterfaces
           az resource delete --resource-group satha-pc --name satha-vm_OsDisk_1_625d933363ea4c24bfd208af5539a62f --resource-type Microsoft.Compute/disks
-          az resource delete --resource-group satha-pc --name satha-vm --resource-type Microsoft.Compute/disks
+          az resource delete --resource-group satha-pc --name satha-ntfs-disk --resource-type Microsoft.Compute/disks
