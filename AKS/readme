@@ -1,0 +1,30 @@
+kubectl get secrets -n argocd
+kubectl edit secret argocd-initial-admin-secret -n argocd
+echo WE5acXQ0RmRHc3k2SzRpUQ== | base64 --decode
+kubectl edit svc argocd-server -n argocd
+kkubectl get nodes -o wide
+
+http://4.213.170.78:30581/
+
+https://4.213.223.62:443/
+admin
+XNZqt4FdGsy6K4iQ
+
+
+#Set the cluster subscription
+az account set --subscription b050d17e-d9e9-4de4-a42d-01dea00ec4fe
+#Download cluster credentials
+az aks get-credentials --resource-group satha-pc --name satha-aks --overwrite-existing
+#List all deployments in all namespaces
+kubectl get deployments --all-namespaces=true
+#Install ArgoCD
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+#Change the argocd-server service type to LoadBalancer:
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+#get secrets of ArgoCD
+kubectl get secrets -n argocd
+#edit the secret
+kubectl edit secret argocd-initial-admin-secret -n argocd
+#decode the secret
+echo secretname | base64 --decode
