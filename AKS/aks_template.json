@@ -18,9 +18,7 @@
     "windowsProfile_adminPassword": {
             "type": "String",
     "defaultvalue": "Bdc13@2028@123456"
-            }
-        }
-    },
+            },
     "variables": {},
     "resources": [
         {
