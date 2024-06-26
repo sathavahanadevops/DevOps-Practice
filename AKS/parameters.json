@@ -1,0 +1,245 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apiVersion": {
+            "value": "2024-03-02-preview"
+        },
+        "resourceName": {
+            "value": "satha-aks"
+        },
+        "location": {
+            "value": "centralindia"
+        },
+        "isLocationEdgeZone": {
+            "value": false
+        },
+        "edgeZone": {
+            "value": {}
+        },
+        "useServicePrincipal": {
+            "value": false
+        },
+        "clusterSku": {
+            "value": {
+                "name": "Base",
+                "tier": "Free"
+            }
+        },
+        "clusterTags": {
+            "value": {}
+        },
+        "tagsForAllResources": {
+            "value": {}
+        },
+        "clusterIdentity": {
+            "value": {
+                "type": "SystemAssigned"
+            }
+        },
+        "enableAadProfile": {
+            "value": false
+        },
+        "aadProfile": {
+            "value": {}
+        },
+        "dnsPrefix": {
+            "value": "satha-aks-dns"
+        },
+        "kubernetesVersion": {
+            "value": "1.28.9"
+        },
+        "enableRBAC": {
+            "value": true
+        },
+        "windowsProfile": {
+            "value": false
+        },
+        "nodeResourceGroup": {
+            "value": "MC_satha-pc_satha-aks_southindia"
+        },
+        "upgradeChannel": {
+            "value": "patch"
+        },
+        "servicePrincipalClientId": {
+            "value": null
+        },
+        "servicePrincipalClientSecret": {
+            "value": null
+        },
+        "adminGroupObjectIDs": {
+            "value": []
+        },
+        "principalId": {
+            "value": ""
+        },
+        "supportPlan": {
+            "value": "KubernetesOfficial"
+        },
+        "azureRbac": {
+            "value": false
+        },
+        "disableLocalAccounts": {
+            "value": false
+        },
+        "enablePrivateCluster": {
+            "value": false
+        },
+        "isPrivateClusterSupported": {
+            "value": true
+        },
+        "enableAuthorizedIpRange": {
+            "value": false
+        },
+        "authorizedIPRanges": {
+            "value": []
+        },
+        "isPublicNetworkAccessEnabled": {
+            "value": false
+        },
+        "publicNetworkAccess": {
+            "value": "Enabled"
+        },
+        "enableDiskEncryptionSetID": {
+            "value": false
+        },
+        "diskEncryptionSetID": {
+            "value": ""
+        },
+        "aadSessionKey": {
+            "value": null
+        },
+        "isAzurePolicySupported": {
+            "value": true
+        },
+        "enableAzurePolicy": {
+            "value": false
+        },
+        "isSecretStoreCSIDDriverSupported": {
+            "value": true
+        },
+        "enableSecretStoreCSIDriver": {
+            "value": false
+        },
+        "enableOmsAgent": {
+            "value": false
+        },
+        "workspaceRegion": {
+            "value": "East US"
+        },
+        "workspaceName": {
+            "value": ""
+        },
+        "omsWorkspaceId": {
+            "value": ""
+        },
+        "omsSku": {
+            "value": "standalone"
+        },
+        "aciVnetSubnetName": {
+            "value": ""
+        },
+        "aciConnectorLinuxEnabled": {
+            "value": false
+        },
+        "acrName": {
+            "value": ""
+        },
+        "acrResourceGroup": {
+            "value": ""
+        },
+        "guidValue": {
+            "value": "3ca266cf-63b2-47ba-8480-611c7b96a172"
+        },
+        "enableVnetSubnetID": {
+            "value": false
+        },
+        "vnetSubnetID": {
+            "value": ""
+        },
+        "loadBalancerSku": {
+            "value": "Standard"
+        },
+        "networkPolicy": {
+            "value": ""
+        },
+        "networkPlugin": {
+            "value": "azure"
+        },
+        "serviceCidr": {
+            "value": ""
+        },
+        "dnsServiceIP": {
+            "value": ""
+        },
+        "spotMaxPrice": {
+            "value": ""
+        },
+        "vmssNodePool": {
+            "value": true
+        },
+        "isAvailabilityZoneEnabled": {
+            "value": true
+        },
+        "osDiskSizeGB": {
+            "value": 0
+        },
+        "agentCount": {
+            "value": 3
+        },
+        "scaleSetEvictionPolicy": {
+            "value": "Delete"
+        },
+        "scaleSetPriority": {
+            "value": "Regular"
+        },
+        "agentTags": {
+            "value": {}
+        },
+        "enableNodePublicIP": {
+            "value": false
+        },
+        "agentNodeTaints": {
+            "value": []
+        },
+        "agentNodeLables": {
+            "value": {}
+        },
+        "agentAvailabilityZones": {
+            "value": []
+        },
+        "agentMode": {
+            "value": "System"
+        },
+        "agentMaxPods": {
+            "value": 30
+        },
+        "agentOSType": {
+            "value": "Linux"
+        },
+        "agentVMSize": {
+            "value": "Standard_D2_v3"
+        },
+        "agentMaxCount": {
+            "value": 5
+        },
+        "agentMinCount": {
+            "value": 3
+        },
+        "enableAutoScaling": {
+            "value": true
+        },
+        "serviceMeshMode": {
+            "value": "Disabled"
+        },
+        "istioInternalIngressGateway": {
+            "value": false
+        },
+        "istioExternalIngressGateway": {
+            "value": false
+        },
+        "nodeOSUpgradeChannel": {
+            "value": "NodeImage"
+        }
+    }
+}
