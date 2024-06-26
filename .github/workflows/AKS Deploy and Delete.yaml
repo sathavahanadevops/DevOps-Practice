@@ -31,9 +31,9 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: satha-pc
-          template: ./windows-vm/aks_template.json
-          parameters: ./windows-vm/aks_parameters.json
-          deploymentName: DiskCreation
+          template: ./AKS/aks_template.json
+          parameters: ./AKS/aks_parameters.json
+          deploymentName: AKS Creation
 
 
 
