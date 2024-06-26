@@ -50,5 +50,5 @@ jobs:
 
       - name: Delete Deployed Resources
         run: |
-          az resource delete --resource-group satha-pc --name satha-windows-vm --resource-type Microsoft.Compute/virtualMachines
+          az resource delete --resource-group satha-pc --name satha-aks --resource-type Microsoft.ContainerService/ManagedClusters
           
