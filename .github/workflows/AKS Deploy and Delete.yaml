@@ -6,16 +6,16 @@ on:
       action:
         description: 'Select the action to perform'
         required: true
-        default: 'Deploy-Azure-VM'
+        default: 'Deploy-Azure-AKS'
         type: choice
         options:
-          - Deploy-Azure-VM
-          - Delete-Azure-VM
+          - Deploy-Azure-AKS
+          - Delete-Azure-AKS
           - Both
 
 jobs:
   Deploy-Azure-AKS:
-    if: ${{ github.event.inputs.action == 'Deploy-Azure-VM' || github.event.inputs.action == 'Both' }}
+    if: ${{ github.event.inputs.action == 'Deploy-Azure-AKS' || github.event.inputs.action == 'Both' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -38,7 +38,7 @@ jobs:
 
 
   Delete-Azure-AKS:
-    if: ${{ github.event.inputs.action == 'Delete-Azure-VM' || github.event.inputs.action == 'Both' }}
+    if: ${{ github.event.inputs.action == 'Delete-Azure-AKS' || github.event.inputs.action == 'Both' }}
     runs-on: ubuntu-latest
     needs: Deploy-Azure-AKS
     environment: delete-approval
