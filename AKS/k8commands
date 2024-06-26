@@ -1,0 +1,29 @@
+
+#kubernetes commands
+kubectl get svc --all-namespaces=true
+kubectl get nodes --all-namespaces=true
+kubectl get pods --all-namespaces=true
+kubectl create namespace <name>
+kubectl get namespaces
+kubectl config set-context --current --namespace=<namespace>
+kubectl describe pod <pod_name>
+kubectl logs <pod_name>
+kubectl exec -it <pod_name> -- <command>
+kubectl create deployment <name> --image=<image_name>
+kubectl get deployments
+kubectl scale deployment <name> --replicas=<count>
+kubectl set image deployment/<name> <container_name>=<new_image>
+kubectl rollout status deployment/<name>
+kubectl rollout history deployment/<name>
+kubectl rollout undo deployment/<name>
+kubectl expose deployment <name> --port=<port> --target-port=<target_port> --type=<type>
+kubectl get services
+kubectl delete service <name>
+kubectl apply -f <ingress_yaml_file>
+kubectl get ingress
+kubectl create configmap <configmap-name> --from-file=<path-to-file>
+kubectl get configmaps
+kubectl create secret generic <name> --from-literal=<key>=<value>
+kubectl get secrets
+
+
