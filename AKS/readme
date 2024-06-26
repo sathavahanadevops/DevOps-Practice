@@ -1,15 +1,3 @@
-kubectl get secrets -n argocd
-kubectl edit secret argocd-initial-admin-secret -n argocd
-echo WE5acXQ0RmRHc3k2SzRpUQ== | base64 --decode
-kubectl edit svc argocd-server -n argocd
-kkubectl get nodes -o wide
-
-http://4.213.170.78:30581/
-
-https://4.213.223.62:443/
-admin
-XNZqt4FdGsy6K4iQ
-
 
 #Set the cluster subscription
 az account set --subscription b050d17e-d9e9-4de4-a42d-01dea00ec4fe
@@ -28,3 +16,44 @@ kubectl get secrets -n argocd
 kubectl edit secret argocd-initial-admin-secret -n argocd
 #decode the secret
 echo secretname | base64 --decode
+kubectl get secrets -n argocd
+kubectl edit secret argocd-initial-admin-secret -n argocd
+echo WE5acXQ0RmRHc3k2SzRpUQ== | base64 --decode
+kubectl edit svc argocd-server -n argocd
+kkubectl get nodes -o wide
+
+http://4.213.170.78:30581/
+
+https://4.213.223.62:443/
+admin
+XNZqt4FdGsy6K4iQ
+
+
+#kubernetes commands
+kubectl get svc --all-namespaces=true
+kubectl get nodes --all-namespaces=true
+kubectl get pods --all-namespaces=true
+kubectl create namespace <name>
+kubectl get namespaces
+kubectl config set-context --current --namespace=<namespace>
+kubectl describe pod <pod_name>
+kubectl logs <pod_name>
+kubectl exec -it <pod_name> -- <command>
+kubectl create deployment <name> --image=<image_name>
+kubectl get deployments
+kubectl scale deployment <name> --replicas=<count>
+kubectl set image deployment/<name> <container_name>=<new_image>
+kubectl rollout status deployment/<name>
+kubectl rollout history deployment/<name>
+kubectl rollout undo deployment/<name>
+kubectl expose deployment <name> --port=<port> --target-port=<target_port> --type=<type>
+kubectl get services
+kubectl delete service <name>
+kubectl apply -f <ingress_yaml_file>
+kubectl get ingress
+kubectl create configmap <configmap-name> --from-file=<path-to-file>
+kubectl get configmaps
+kubectl create secret generic <name> --from-literal=<key>=<value>
+kubectl get secrets
+
+
