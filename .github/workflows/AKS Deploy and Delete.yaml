@@ -1,0 +1,66 @@
+name: AKS Deploy and Delete
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Select the action to perform'
+        required: true
+        default: 'Deploy-Azure-VM'
+        type: choice
+        options:
+          - Deploy-Azure-VM
+          - Delete-Azure-VM
+          - Both
+
+jobs:
+  Deploy-Azure-VM:
+    if: ${{ github.event.inputs.action == 'Deploy-Azure-VM' || github.event.inputs.action == 'Both' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}"}'
+
+      - name: Deploy DiskCreation
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: satha-pc
+          template: ./windows-vm/satha-disk-template.json
+          parameters: ./windows-vm/satha-disk-parameters.json
+          deploymentName: DiskCreation
+
+      - name: Deploy Windows VM
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: satha-pc
+          template: ./windows-vm/windows-vm-template.json
+          parameters: ./windows-vm/windows-vm-parameters.json
+          deploymentName: VmCreation
+
+  Delete-Azure-VM:
+    if: ${{ github.event.inputs.action == 'Delete-Azure-VM' || github.event.inputs.action == 'Both' }}
+    runs-on: ubuntu-latest
+    needs: Deploy-Azure-VM
+    environment: delete-approval
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}"}'
+
+      - name: Delete Deployed Resources
+        run: |
+          az resource delete --resource-group satha-pc --name satha-windows-vm --resource-type Microsoft.Compute/virtualMachines
+          az resource delete --resource-group satha-pc --name satha-windows-vm-ip --resource-type Microsoft.Network/publicIPAddresses
+          az resource delete --resource-group satha-pc --name satha-windows-vm-nsg --resource-type Microsoft.Network/networkSecurityGroups
+          az resource delete --resource-group satha-pc --name satha-windows-vm-vnet --resource-type Microsoft.Network/virtualNetworks
+          az resource delete --resource-group satha-pc --name satha-windows-vm225 --resource-type Microsoft.Network/networkInterfaces
+          az resource delete --resource-group satha-pc --name satha-vm_OsDisk_1_625d933363ea4c24bfd208af5539a62f --resource-type Microsoft.Compute/disks
+          az resource delete --resource-group satha-pc --name satha-ntfs-disk --resource-type Microsoft.Compute/disks
