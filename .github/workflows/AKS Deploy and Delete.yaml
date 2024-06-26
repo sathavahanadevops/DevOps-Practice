@@ -33,7 +33,7 @@ jobs:
           resourceGroupName: satha-pc
           template: ./AKS/aks_template.json
           parameters: ./AKS/aks_parameters.json
-          deploymentName: AKS_Creation
+          deploymentName: akscreation
 
 
 
