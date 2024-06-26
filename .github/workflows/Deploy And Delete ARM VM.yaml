@@ -57,9 +57,8 @@ jobs:
 
       - name: Delete Deployed Resources
         run: |
-          az resource delete --resource-group satha-pc --name satha-windows-vm --resource-type Microsoft.Compute/virtualMachines
           az resource delete --resource-group satha-pc --name satha-windows-vm-ip --resource-type Microsoft.Network/publicIPAddresses
-          az resource delete --resource-group satha-pc --name satha-windows-vm-nsg --resource-type Microsoft.Network/networkSecurityGroups
+          az resource delete --resource-group satha-pc --name satha-windows-vm --resource-type Microsoft.Compute/virtualMachines
           az resource delete --resource-group satha-pc --name satha-windows-vm-vnet --resource-type Microsoft.Network/virtualNetworks
           az resource delete --resource-group satha-pc --name satha-windows-vm225 --resource-type Microsoft.Network/networkInterfaces
           az resource delete --resource-group satha-pc --name satha-windows-vm_OsDisk_1_c9de335022d64679a54852a4b2b2761e --resource-type Microsoft.Compute/disks
