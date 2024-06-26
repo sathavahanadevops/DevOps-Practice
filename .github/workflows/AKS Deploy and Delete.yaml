@@ -31,8 +31,8 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: satha-pc
-          template: ./windows-vm/satha-disk-template.json
-          parameters: ./windows-vm/satha-disk-parameters.json
+          template: ./windows-vm/aks_template.json
+          parameters: ./windows-vm/aks_parameters.json
           deploymentName: DiskCreation
 
 
