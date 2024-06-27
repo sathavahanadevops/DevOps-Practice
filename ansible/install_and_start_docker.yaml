@@ -40,6 +40,11 @@
 
     - name: Restart Docker service
       service:
-       name: docker
-       state: restarted
+        name: docker
+        state: restarted
+
+    - name: Check Docker service status
+      command: systemctl status docker
+      register: docker_status
+      ignore_errors: yes
 
