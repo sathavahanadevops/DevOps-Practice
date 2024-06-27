@@ -1,0 +1,60 @@
+---
+- name: Deploy NGINX Docker Container
+  hosts: your_target_host  # Replace with your target host or group
+  become: true  # Optionally, if sudo access is required
+
+  tasks:
+    - name: Check if Docker is installed
+      command: docker --version
+      register: docker_check
+      ignore_errors: true
+
+    - name: Install Docker if not already installed
+      apt:
+        name: docker.io
+        state: present
+      when: docker_check.rc != 0
+      tags:
+        - docker
+
+    - name: Copy Dockerfile and static files to target host
+      copy:
+        src: path/to/your/Dockerfile  # Replace with the path to your Dockerfile
+        dest: /tmp/Dockerfile
+      tags:
+        - docker
+
+    - name: Copy NGINX configuration file
+      copy:
+        src: path/to/your/nginx.conf  # Replace with the path to your nginx.conf
+        dest: /tmp/nginx.conf
+      tags:
+        - docker
+
+    - name: Copy index.html and styles.css
+      copy:
+        src: path/to/your/sourcecode/  # Replace with the path to your sourcecode directory
+        dest: /tmp/sourcecode
+        remote_src: yes
+      tags:
+        - docker
+
+    - name: Build Docker image
+      docker_image:
+        build:
+          path: /tmp
+          dockerfile: /tmp/Dockerfile
+        name: my-nginx-image
+        state: present
+      tags:
+        - docker
+
+    - name: Run Docker container
+      docker_container:
+        name: nginx-container
+        image: my-nginx-image
+        ports:
+          - "8080:80"  # Adjust port mapping as needed
+        state: started
+      tags:
+        - docker
