@@ -78,6 +78,9 @@ jobs:
 
       - name: Run Ansible playbook
         run: ansible-playbook ./ansible/install_argocd.yaml
+
+      - name: Run Ansible playbook
+        run: ansible-playbook ./ansible/install and start docker.yaml
       
      
 
