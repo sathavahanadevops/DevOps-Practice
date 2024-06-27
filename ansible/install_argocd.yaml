@@ -1,8 +1,14 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Check if namespace argocd exists
+      shell: kubectl get namespace argocd
+      register: namespace_check
+      ignore_errors: true
+
     - name: Create namespace argocd
       shell: kubectl create namespace argocd
+      when: namespace_check.rc != 0
 
     - name: Install ArgoCD
       shell: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
