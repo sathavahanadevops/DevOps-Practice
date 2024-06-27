@@ -50,7 +50,7 @@ jobs:
           pip install ansible
 
       - name: Set up Azure CLI
-        uses: azure/cli@v2.0.0
+        uses: azure/CLI@v1
 
       - name: Install kubectl
         uses: azure/setup-kubectl@v1
