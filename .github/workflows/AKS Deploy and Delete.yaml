@@ -32,11 +32,14 @@ jobs:
       - name: Log in to Azure Container Registry
         run: az acr login --name ${{ secrets.ACR_NAME }}
 
-      - name: Build and tag Docker image
-        run: docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:latest ./sourcecode
+      - name: Build Docker image
+        id: docker_build
+        run: |
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.run_number }} ./sourcecode
 
       - name: Push Docker image to ACR
-        run: docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:latest
+        run: |
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.run_number }}
 
 
       - name: Deploy Azure AKS
