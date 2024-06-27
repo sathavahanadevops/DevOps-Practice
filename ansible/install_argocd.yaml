@@ -1,0 +1,33 @@
+---
+- name: Install ArgoCD on AKS Cluster
+  hosts: k8s_cluster
+  tasks:
+    - name: Log in to Azure
+      shell: az login --service-principal -u <client_id> -p <client_secret> --tenant <tenant_id>
+      register: login_result
+
+    - name: Get AKS credentials
+      shell: az aks get-credentials --resource-group <resource_group_name> --name <aks_cluster_name>
+      register: aks_creds_result
+
+    - name: Create namespace for ArgoCD
+      shell: kubectl create namespace argocd
+      register: create_ns_result
+      ignore_errors: true
+
+    - name: Apply ArgoCD manifest
+      shell: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+      register: apply_manifest_result
+
+    - name: Change ArgoCD server service type to LoadBalancer
+      shell: kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+      register: patch_svc_result
+
+    - name: Print results
+      debug:
+        msg: |
+          Login Result: {{ login_result }}
+          AKS Credentials Result: {{ aks_creds_result }}
+          Create Namespace Result: {{ create_ns_result }}
+          Apply Manifest Result: {{ apply_manifest_result }}
+          Patch Service Result: {{ patch_svc_result }}
