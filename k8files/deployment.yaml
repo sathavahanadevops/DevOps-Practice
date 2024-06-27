@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: resume-webpage
-          image: your-dockerhub-username/resume-webpage:latest  # Replace with your Docker image
+          image: sathak8.azurecr.io/resume:23
           ports:
             - containerPort: 80
