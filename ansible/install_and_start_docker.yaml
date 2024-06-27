@@ -1,6 +1,6 @@
 ---
 - name: Install Docker and start it
-  hosts: all  # Replace with your target host/group
+  hosts: localhost  # Replace with your target host/group
   become: yes  # Run tasks with root privileges
 
   tasks:
