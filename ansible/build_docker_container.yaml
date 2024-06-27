@@ -17,34 +17,13 @@
       tags:
         - docker
 
-    - name: Copy Dockerfile and static files to target host
-      copy:
-        src: path/to/your/Dockerfile  # Replace with the path to your Dockerfile
-        dest: /tmp/Dockerfile
-      tags:
-        - docker
-
-    - name: Copy NGINX configuration file
-      copy:
-        src: path/to/your/nginx.conf  # Replace with the path to your nginx.conf
-        dest: /tmp/nginx.conf
-      tags:
-        - docker
-
-    - name: Copy index.html and styles.css
-      copy:
-        src: path/to/your/sourcecode/  # Replace with the path to your sourcecode directory
-        dest: /tmp/sourcecode
-        remote_src: yes
-      tags:
-        - docker
 
     - name: Build Docker image
       docker_image:
         build:
-          path: /tmp
-          dockerfile: /tmp/Dockerfile
-        name: my-nginx-image
+          path: /docker
+          dockerfile: /docker/Dockerfile
+        name: my-resume-image
         state: present
       tags:
         - docker
@@ -52,7 +31,7 @@
     - name: Run Docker container
       docker_container:
         name: nginx-container
-        image: my-nginx-image
+        image: my-resume-image
         ports:
           - "8080:80"  # Adjust port mapping as needed
         state: started
