@@ -61,8 +61,7 @@ jobs:
           sudo apt-get install -y sshpass
 
       - name: Run Ansible playbook
-        run: ./ansible/install_argocd.yaml   
-
+        run: ansible-playbook ./ansible/install_argocd.yaml
 
 
   Delete-Azure-AKS:
