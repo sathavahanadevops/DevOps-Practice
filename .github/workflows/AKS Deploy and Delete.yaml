@@ -81,6 +81,12 @@ jobs:
 
       - name: Run Ansible playbook
         run: ansible-playbook ./ansible/install_and_start_docker.yaml
+
+      - name: Start Docker Service
+        run: sudo systemctl start docker
+
+      - name: Verify Docker Service
+        run: docker --version
       
      
 
