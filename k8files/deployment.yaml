@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-webpage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resume-webpage
+  template:
+    metadata:
+      labels:
+        app: resume-webpage
+    spec:
+      containers:
+        - name: resume-webpage
+          image: your-dockerhub-username/resume-webpage:latest  # Replace with your Docker image
+          ports:
+            - containerPort: 80
