@@ -20,86 +20,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: '{"clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}"}'
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Azure Container Registry
-        run: az acr login --name ${{ secrets.ACR_NAME }}
-
-      - name: Build Docker image
-        id: docker_build
-        run: |
-          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.run_number }} ./sourcecode
-
-      - name: Push Docker image to ACR
-        run: |
-          docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ secrets.IMAGE_NAME }}:${{ github.run_number }}
-
-
-      - name: Deploy Azure AKS
-        uses: azure/arm-deploy@v1
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: satha-pc
-          template: ./AKS/template.json
-          parameters: ./AKS/parameters.json
-          deploymentName: akscreation
-      
-      - name: Get AKS credentials
-        run: |
-          az aks get-credentials --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }} --overwrite-existing
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Extract version number
+        id: vars
+        run: echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
         with:
-          python-version: '3.x'
-
-      - name: Set up Ansible
-        run: |
-          python -m pip install --upgrade pip
-          pip install ansible
-
-
-      - name: Install kubectl
-        uses: azure/setup-kubectl@v1
-        with:
-          version: 'latest'
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
-
-      - name: Run Ansible playbook
-        run: ansible-playbook ./ansible/install_argocd.yaml
-
-      - name: Install Docker
-        run: |
-           sudo dockerd &
-
-      - name: extract argocd password
-        run: |
-          kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode > argocd-initial-admin-password.txt
-
-
-  Delete-Azure-AKS:
-    if: ${{ github.event.inputs.action == 'Delete-Azure-AKS' || github.event.inputs.action == 'Both' }}
-    runs-on: ubuntu-latest
-    needs: Deploy-Azure-AKS
-    environment: delete-approval
-    steps:
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: '{"clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}"}'
-
-      - name: Delete Deployed Resources
-        run: |
-          az resource delete --resource-group satha-pc --name satha-aks --resource-type Microsoft.ContainerService/ManagedClusters
-          
+          context: ./sourcecode
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/my-image:${{ env.BUILD_NUMBER }}
