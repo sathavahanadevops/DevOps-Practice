@@ -83,14 +83,15 @@ jobs:
         run: |
          sudo apt-get update
          sudo apt-get install -y docker.io
+         sudo systemctl start docker
+         sudo systemctl enable docker
 
-      - name: Start Docker Service
-        run: sudo systemctl start docker
-
-      - name: Verify Docker Service
+      - name: Verify Docker installation
         run: docker --version
-       
-     
+
+      - name: extract argocd password
+        run: |
+          kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode > argocd-initial-admin-password.txt
 
 
   Delete-Azure-AKS:
