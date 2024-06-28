@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: resume-webpage
-          image: sathak8.azurecr.io/resume:23
+          image: sathadocker/resumek8:33
           ports:
             - containerPort: 80
