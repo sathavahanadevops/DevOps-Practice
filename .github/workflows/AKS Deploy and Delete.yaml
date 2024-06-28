@@ -39,4 +39,7 @@ jobs:
         with:
           context: ./sourcecode
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-image:${{ env.BUILD_NUMBER }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/resumek8:${{ env.BUILD_NUMBER }}
+
+      - name: Pull Docker image
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/resumek8:${{ env.BUILD_NUMBER }}
