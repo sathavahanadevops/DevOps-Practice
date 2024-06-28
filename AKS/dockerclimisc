@@ -1,6 +1,8 @@
+
+-------------------------------------------------------------------------------------------------------------------------
 #Azure cli install in ubuntu
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
+--------------------------------------------------------------------------------------------------------------------------
 #install docker in ubuntu
 
 # Add Docker's official GPG key:
@@ -25,18 +27,18 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 #verify
 sudo docker run hello-world
 
-
+--------------------------------------------------------------------------------------------------------------------------
 #installkubectl
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
    echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
    kubectl version --client
-
+--------------------------------------------------------------------------------------------------------------------------
 #login to aks
 az login
 az account set --subscription b050d17e-d9e9-4de4-a42d-01dea00ec4fe
 az aks get-credentials --resource-group satha-pc --name satha-aks --overwrite-existing
-
+--------------------------------------------------------------------------------------------------------------------------
 #extract the password of argocd
 kubectl get secret my-secret -o jsonpath='{.data.secret-key}' | base64 --decode > secret.txt
