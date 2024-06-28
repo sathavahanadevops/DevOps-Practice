@@ -1,0 +1,53 @@
+[
+  {
+    "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Resources/deployments/CreateVm-canonical.0001-com-ubuntu-server-focal-2-20240628130627/operations/D6CAA3E07B6BAB7C",
+    "operationId": "D6CAA3E07B6BAB7C",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Running",
+      "timestamp": "2024-06-28T07:39:36.3403753Z",
+      "duration": "PT0.6312913S",
+      "trackingId": "5752310b-fad3-430e-bf29-0855f4765127",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Network/virtualNetworks/satha-vnet",
+        "resourceType": "Microsoft.Network/virtualNetworks",
+        "resourceName": "satha-vnet"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Resources/deployments/CreateVm-canonical.0001-com-ubuntu-server-focal-2-20240628130627/operations/0908C8C4EEE3EEB4",
+    "operationId": "0908C8C4EEE3EEB4",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Running",
+      "timestamp": "2024-06-28T07:39:36.2886282Z",
+      "duration": "PT0.5795442S",
+      "trackingId": "a335eafa-90d0-4d8a-bc6f-f48fe81f00b9",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Network/publicIpAddresses/sathalinux-ip",
+        "resourceType": "Microsoft.Network/publicIpAddresses",
+        "resourceName": "sathalinux-ip"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Resources/deployments/CreateVm-canonical.0001-com-ubuntu-server-focal-2-20240628130627/operations/C805A04D318E8DDA",
+    "operationId": "C805A04D318E8DDA",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Running",
+      "timestamp": "2024-06-28T07:39:36.2206781Z",
+      "duration": "PT0.5115941S",
+      "trackingId": "b3f13d08-ee3d-46a7-a820-272805290293",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Network/networkSecurityGroups/sathalinux-nsg",
+        "resourceType": "Microsoft.Network/networkSecurityGroups",
+        "resourceName": "sathalinux-nsg"
+      }
+    }
+  }
+]
