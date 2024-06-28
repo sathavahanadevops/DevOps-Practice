@@ -81,14 +81,7 @@ jobs:
 
       - name: Install Docker
         run: |
-         sudo apt-get remove docker docker-engine docker.io containerd runc
-         sudo apt-get update
-         sudo apt-get upgrade
-         sudo apt-get install -y docker.io
-         sudo apt-get install -y containerd
-         sudo systemctl start docker
-         sudo systemctl enable docker
-         sudo docker --version
+           sudo dockerd &
 
       - name: extract argocd password
         run: |
