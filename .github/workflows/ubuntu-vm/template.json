@@ -1,0 +1,262 @@
+{
+  "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Resources/deployments/CreateVm-canonical.0001-com-ubuntu-server-focal-2-20240628130627",
+  "name": "CreateVm-canonical.0001-com-ubuntu-server-focal-2-20240628130627",
+  "type": "Microsoft.Resources/deployments",
+  "tags": {
+    "primaryResourceId": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourcegroups/satha-pc/providers/Microsoft.Compute/virtualMachines/sathalinux",
+    "marketplaceItemId": "Microsoft.VirtualMachine",
+    "provisioningHash": "SolutionProvider"
+  },
+  "properties": {
+    "templateHash": "8106803212803677423",
+    "parameters": {
+      "location": {
+        "type": "String",
+        "value": "southindia"
+      },
+      "networkInterfaceName": {
+        "type": "String",
+        "value": "sathalinux289"
+      },
+      "enableAcceleratedNetworking": {
+        "type": "Bool",
+        "value": true
+      },
+      "networkSecurityGroupName": {
+        "type": "String",
+        "value": "sathalinux-nsg"
+      },
+      "networkSecurityGroupRules": {
+        "type": "Array",
+        "value": [
+          {
+            "name": "SSH",
+            "properties": {
+              "priority": 300,
+              "protocol": "TCP",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "22"
+            }
+          },
+          {
+            "name": "HTTP",
+            "properties": {
+              "priority": 320,
+              "protocol": "TCP",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "80"
+            }
+          },
+          {
+            "name": "HTTPS",
+            "properties": {
+              "priority": 340,
+              "protocol": "TCP",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "443"
+            }
+          }
+        ]
+      },
+      "subnetName": {
+        "type": "String",
+        "value": "default"
+      },
+      "virtualNetworkName": {
+        "type": "String",
+        "value": "satha-vnet"
+      },
+      "addressPrefixes": {
+        "type": "Array",
+        "value": [
+          "10.0.0.0/16"
+        ]
+      },
+      "subnets": {
+        "type": "Array",
+        "value": [
+          {
+            "name": "default",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      },
+      "publicIpAddressName": {
+        "type": "String",
+        "value": "sathalinux-ip"
+      },
+      "publicIpAddressType": {
+        "type": "String",
+        "value": "Static"
+      },
+      "publicIpAddressSku": {
+        "type": "String",
+        "value": "Standard"
+      },
+      "pipDeleteOption": {
+        "type": "String",
+        "value": "Delete"
+      },
+      "virtualMachineName": {
+        "type": "String",
+        "value": "sathalinux"
+      },
+      "virtualMachineComputerName": {
+        "type": "String",
+        "value": "sathalinux"
+      },
+      "virtualMachineRG": {
+        "type": "String",
+        "value": "satha-pc"
+      },
+      "osDiskType": {
+        "type": "String",
+        "value": "StandardSSD_LRS"
+      },
+      "osDiskDeleteOption": {
+        "type": "String",
+        "value": "Delete"
+      },
+      "virtualMachineSize": {
+        "type": "String",
+        "value": "Standard_D2s_v3"
+      },
+      "nicDeleteOption": {
+        "type": "String",
+        "value": "Delete"
+      },
+      "hibernationEnabled": {
+        "type": "Bool",
+        "value": false
+      },
+      "adminUsername": {
+        "type": "String",
+        "value": "sathavahana"
+      },
+      "adminPassword": {
+        "type": "SecureString"
+      },
+      "patchMode": {
+        "type": "String",
+        "value": "AutomaticByPlatform"
+      },
+      "rebootSetting": {
+        "type": "String",
+        "value": "IfRequired"
+      },
+      "securityType": {
+        "type": "String",
+        "value": "TrustedLaunch"
+      },
+      "secureBoot": {
+        "type": "Bool",
+        "value": true
+      },
+      "vTPM": {
+        "type": "Bool",
+        "value": true
+      }
+    },
+    "mode": "Incremental",
+    "debugSetting": {
+      "detailLevel": "None"
+    },
+    "provisioningState": "Running",
+    "timestamp": "2024-06-28T07:39:36.2655197Z",
+    "duration": "PT0.9392705S",
+    "correlationId": "1a1988aa-c38b-4e8f-826d-e47e32594866",
+    "providers": [
+      {
+        "namespace": "Microsoft.Network",
+        "resourceTypes": [
+          {
+            "resourceType": "networkInterfaces",
+            "locations": [
+              "southindia"
+            ]
+          },
+          {
+            "resourceType": "networkSecurityGroups",
+            "locations": [
+              "southindia"
+            ]
+          },
+          {
+            "resourceType": "virtualNetworks",
+            "locations": [
+              "southindia"
+            ]
+          },
+          {
+            "resourceType": "publicIpAddresses",
+            "locations": [
+              "southindia"
+            ]
+          }
+        ]
+      },
+      {
+        "namespace": "Microsoft.Compute",
+        "resourceTypes": [
+          {
+            "resourceType": "virtualMachines",
+            "locations": [
+              "southindia"
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Network/networkSecurityGroups/sathalinux-nsg",
+            "resourceType": "Microsoft.Network/networkSecurityGroups",
+            "resourceName": "sathalinux-nsg"
+          },
+          {
+            "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Network/virtualNetworks/satha-vnet",
+            "resourceType": "Microsoft.Network/virtualNetworks",
+            "resourceName": "satha-vnet"
+          },
+          {
+            "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Network/publicIpAddresses/sathalinux-ip",
+            "resourceType": "Microsoft.Network/publicIpAddresses",
+            "resourceName": "sathalinux-ip"
+          }
+        ],
+        "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Network/networkInterfaces/sathalinux289",
+        "resourceType": "Microsoft.Network/networkInterfaces",
+        "resourceName": "sathalinux289"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Network/networkInterfaces/sathalinux289",
+            "resourceType": "Microsoft.Network/networkInterfaces",
+            "resourceName": "sathalinux289"
+          }
+        ],
+        "id": "/subscriptions/b050d17e-d9e9-4de4-a42d-01dea00ec4fe/resourceGroups/satha-pc/providers/Microsoft.Compute/virtualMachines/sathalinux",
+        "resourceType": "Microsoft.Compute/virtualMachines",
+        "resourceName": "sathalinux"
+      }
+    ],
+    "validationLevel": "Template"
+  }
+}
