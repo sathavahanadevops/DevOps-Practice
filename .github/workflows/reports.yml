@@ -3,7 +3,7 @@ name: Test Workflow
 on:
   pull_request:
     branches:
-      - main
+      - premerge
     paths:
       - SourceCode/Microservices/Reports/**
       - '!SourceCode/**'
