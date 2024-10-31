@@ -1,0 +1,27 @@
+name: Test Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - SourceCode/Microservices/Reports/**
+      - '!SourceCode/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/Reports.OneFps.PullRequest.Build.Template.yaml
+    with:
+      solution: ${{ vars.SOLUTION }}
+      projectname: ${{ vars.PROJECT_NAME }}
+      buildConfig: ${{ vars.BUILD_CONFIGURATION }}
+      sonarqube: 'Sonarqube-ReportingAPI'
+      sonarqubeprojectname: 'Reporting API'
+      projectkey: 'com.shell.ReportingAPI'
+      runsettingsfile: 'SourceCode/Microservices/Reports/Shell.OneFps.Reports/CodeCoverage.runsettings'
+      ErrorFlag: true
+      qualitycheck: false
+      collectCodeCoverage: true
+      publishSonarQube: true
+      bashtask: true
